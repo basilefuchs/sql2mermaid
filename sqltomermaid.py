@@ -4,9 +4,11 @@ import re
 def sql2mermaid(q) :
     q = re.sub(r"\n"," ", q).lower()
     if re.search(r"union", q):
-        print("WARNING : sql2mermaid does not support SQL queries with UNION")
+        print("WARNING : sql2mermaid does not support SQL queries with UNION.")
+    elif re.search(r"^((?!join).)*$", q):
+        print("WARNING : sql2mermaid needs a JOIN argument to make a mermaid erDiagram.")
     elif re.search(r"^((?!where).)*$", q):
-        print("WARNING : sql2mermaid needs a WHERE clause, so add a dummy ‘WHERE 1=1’.")
+        print("WARNING : sql2mermaid needs a WHERE clause, so add a dummy 'WHERE 1=1'.")
     else:
         select_clause = re.findall(r"(?<=select).+(?=from)", q)[0]
         from_clause = re.findall(r"(?<=from).+(?=where)", q)[0]

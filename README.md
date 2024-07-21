@@ -1,5 +1,5 @@
 # sql2mermaid
-re and polars packages based function to convert a SQL query to mermaid erDiagram
+function based on the re and polars packages to convert an SQL query into a mermaid erDiagram.
 
 # use
 

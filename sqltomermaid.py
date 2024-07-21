@@ -45,6 +45,10 @@ def sql2mermaid(q) :
             )
             column = pl.concat([column,df])
 
+        column = column.with_columns(
+            ("dtype "+pl.col("name")).alias("name"),
+        ).group_by("identifier").agg(pl.col("name").str.concat("\n"))
+
         for x in re.findall(r"(?<=from|join)\s+\w+\.?\w+\s\w+", from_clause) :
             df = pl.DataFrame(
                 {
@@ -65,18 +69,12 @@ def sql2mermaid(q) :
             )
             join = pl.concat([join,df])
 
-        column = column.with_columns(
-            ("dtype "+pl.col("name")).alias("name"),
-        ).group_by("identifier").agg(pl.col("name").str.concat("\n"))
-
         entities = table.join(
             column,
             on= "identifier",
             how="left"
         ).with_columns(
-            (pl.col("name_right").fill_null("")),
-        ).with_columns(
-            (pl.col("identifier") + "[\"" + pl.col("name") + " AS " + pl.col("identifier") + "\"] {\n" + pl.col("name_right") + "\n}").alias("mermaid"),
+            (pl.col("identifier") + "[\"" + pl.col("name") + " AS " + pl.col("identifier") + "\"] {\n" + pl.col("name_right").fill_null("") + "\n}").alias("mermaid"),
         )
 
         relations = join.with_columns(

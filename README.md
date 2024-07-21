@@ -14,7 +14,9 @@ SELECT
   b.date
 FROM employee a
 INNER JOIN drugs b on a.patient_id = b.patient_id
-WHERE 1=1
+LEFT JOIN deaths c on a.patient_id = c.patient_id
+WHERE
+c.patient_id is null
 ORDER BY b.date"""
 
 # execute function

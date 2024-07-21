@@ -80,5 +80,6 @@ def sql2mermaid(q) :
         relations = join.with_columns(
             (pl.col("first_table") + "||--||" + pl.col("second_table") + " : \"" + pl.col("text") + "\"").alias("mermaid")
         )
+        print("erDiagram")
         [print(row["mermaid"]) for row in entities.iter_rows(named=True)]
         [print(row["mermaid"]) for row in relations.iter_rows(named=True)]

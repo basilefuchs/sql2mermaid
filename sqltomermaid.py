@@ -74,13 +74,13 @@ def sql2mermaid(q) :
             on= "identifier",
             how="left"
         ).with_columns(
-            (pl.col("name_right").fill_null(""))
+            (pl.col("name_right").fill_null("")),
         ).with_columns(
-            (pl.col("identifier") + "[\"" + pl.col("name") + " AS " + pl.col("identifier") + "\"] {\n" + pl.col("name_right") + "\n}").alias("mermaid")
+            (pl.col("identifier") + "[\"" + pl.col("name") + " AS " + pl.col("identifier") + "\"] {\n" + pl.col("name_right") + "\n}").alias("mermaid"),
         )
 
         relations = join.with_columns(
-            (pl.col("first_table") + "||--||" + pl.col("second_table") + " : \"" + pl.col("text") + "\"").alias("mermaid")
+            (pl.col("first_table") + "||--||" + pl.col("second_table") + " : \"" + pl.col("text") + "\"").alias("mermaid"),
         )
         print("erDiagram")
         [print(row["mermaid"]) for row in entities.iter_rows(named=True)]

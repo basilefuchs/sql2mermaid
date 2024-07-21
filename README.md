@@ -5,10 +5,17 @@ function based on the re and polars packages to convert an SQL query into a merm
 
 ```python
 # add your SQL query
-q = """SELECT RSS.ID_RSS, D.TYPE_DIAG
-FROM CORA_REC.TB_SYNTH_RSS RSS
-INNER JOIN CORA_REC.TB_DIAG D ON RSS.ID_SEJOUR=D.ID_SEJOUR AND D.CODE_DIAG = 'C34'
-WHERE 1=1"""
+q = """
+SELECT 
+  a.patient_id,
+  a.last_name,
+  a.first_name,
+  b.drug,
+  b.date
+FROM employee a
+INNER JOIN drugs b on a.patient_id = b.patient_id
+WHERE 1=1
+ORDER BY b.date"""
 
 # execute function
 sql2mermaid(q)

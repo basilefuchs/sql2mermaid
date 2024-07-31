@@ -17,8 +17,6 @@ def sql2mermaid(q) :
     q = re.sub(r"(\w+)?(\s+)?\(.+?\)","function", q)
     q = re.sub(r"case.+end\s+\w+","case_when", q)
     
-    print(q)
-    
     if re.search(r"union|minus|intersect", q):
         print("WARNING : sql2mermaid does not support UNION, INTERSECT, MINUS operators.")
     elif re.search(r"^((?!join).)*$", q):

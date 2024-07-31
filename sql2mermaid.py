@@ -1,16 +1,20 @@
 import polars as pl
 import re
 
+# add query here
 q = """
-# past your query here
+# paste your query here
 """
 
 def sql2mermaid(q) :
     
     q = q.lower()
-    q = re.sub(r"\n|\s+as\s+|\s+"," ", q)
+    q = re.sub(r"\n"," ", q)
+    q = re.sub(r"\s+"," ", q)
+    q = re.sub(r","," ,", q)
+    q = re.sub(r"\s+as\s+"," ", q)
     q = re.sub(r"(?<=where).+","", q)
-    q = re.sub(r"extract.+from","extract_datetime", q)
+    q = re.sub(r"(\w+)?(\s+)?\(.+?\)","function", q)
     q = re.sub(r"case.+end\s+\w+","case_when", q)
     
     print(q)
@@ -25,6 +29,7 @@ def sql2mermaid(q) :
         print("WARNING : sql2mermaid does not support multiple FROM clauses.")
     else:
         select_clause = re.findall(r"(?<=select).+(?=from)", q)[0]
+        select_clause = select_clause+","
         from_clause = re.findall(r"from.+(?=where)", q)[0]
 
         column = pl.DataFrame(
@@ -50,14 +55,23 @@ def sql2mermaid(q) :
             }
         ).cast(pl.Utf8)
 
-        for x in re.findall(r"\w+\.\w+\s+\w+", select_clause) :
-            df = pl.DataFrame(
-                {
-                    "identifier" : [re.search(r"\w+(?=\.)",x)[0]],
-                    "name" : [re.search(r"(?<=\.)\w+",x)[0]],
-                    "alias" : [re.search(r"(?<=\s)\w+",x)[0]],
-                }
-            )
+        for x in re.findall(r"\w+\.\w+.+?,", select_clause) :
+            if re.search(r"(?<=\s)\w+",x):
+                df = pl.DataFrame(
+                    {
+                        "identifier" : [re.search(r"\w+(?=\.)",x)[0]],
+                        "name" : [re.search(r"(?<=\.)\w+",x)[0]],
+                        "alias" : [re.search(r"(?<=\s)\w+",x)[0]]
+                    }
+                )
+            else:
+                 df = pl.DataFrame(
+                    {
+                        "identifier" : [re.search(r"\w+(?=\.)",x)[0]],
+                        "name" : [re.search(r"(?<=\.)\w+",x)[0]],
+                        "alias" : [re.search(r"(?<=\.)\w+",x)[0]],
+                    }
+                 )
             column = pl.concat([column,df])
 
         column = column.with_columns(
@@ -72,7 +86,6 @@ def sql2mermaid(q) :
                 }
             )
             table = pl.concat([table,df])
-
 
         for x in re.findall(r"\w+\.\w+\s?=\s?\w+\.\w+", from_clause) :
             df = pl.DataFrame(

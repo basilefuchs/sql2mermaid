@@ -113,7 +113,7 @@ def sql2mermaid(q) :
         ).with_columns(
             (pl.col("identifier") + "[\"" + pl.col("name") + " as " + pl.col("identifier") + "\"] {\n" + pl.col("name_right").fill_null("") + "\n}").alias("mermaid"),
         )
-        print(entities)
+        # print(entities)
         relations = join.with_columns(
             (pl.col("first_table") + "||--||" + pl.col("second_table") + " : \"" + pl.col("text") + "\"").alias("mermaid"),
         )

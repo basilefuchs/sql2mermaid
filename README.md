@@ -22,3 +22,24 @@ ORDER BY b.date"""
 # execute function
 sql2mermaid(q)
 ```
+# result
+
+```
+erDiagram
+a["employee as a"] {
+dtype patient_id "patient_id"
+dtype last_name "last_name"
+dtype first_name "first_name"
+}
+b["drugs as b"] {
+dtype drug "drug"
+dtype date "date"
+}
+c["deaths as c"] {
+
+}
+a||--||b : "a.patient_id = b.patient_id"
+a||--||c : "a.patient_id = c.patient_id"
+```
+> Note :
+> past result on Mermaid Live editor (https://mermaid.live/)

@@ -25,6 +25,8 @@ sql2mermaid(q)
 # result
 
 ```
+%% Note : sql2mermaid does not support SQL functions.
+
 erDiagram
 a["employee as a"] {
 dtype patient_id "patient_id"

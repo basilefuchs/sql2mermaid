@@ -43,5 +43,4 @@ c["deaths as c"] {
 a||--||b : "a.patient_id = b.patient_id"
 a||--||c : "a.patient_id = c.patient_id"
 ```
-> Note :
-> past result on Mermaid Live editor (https://mermaid.live/)
+> Note : past result on Mermaid Live editor (https://mermaid.live/)

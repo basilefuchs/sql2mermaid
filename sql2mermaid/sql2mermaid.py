@@ -1,6 +1,5 @@
 import polars as pl
 import re
-import warnings
 
 
 def open_sql_file(path: str) -> str:
@@ -31,16 +30,16 @@ def sql2mermaid(query: str) -> str:
     query = re.sub(r"case.+end\s+\w+", "case_when", query)
 
     if re.search(r"union|minus|intersect", query):
-        warnings.warn(
+        raise ValueError(
             "sql2mermaid does not support UNION, INTERSECT, MINUS operators.")
     elif re.search(r"^((?!join).)*$", query):
-        warnings.warn(
+        raise ValueError(
             "sql2mermaid needs a JOIN operation to make a mermaid erDiagram.")
     elif re.search(r"^((?!where).)*$", query):
-        warnings.warn(
+        raise ValueError(
             "sql2mermaid needs a WHERE clause, so add a dummy 'WHERE 1=1'.")
     elif len(re.findall(r"from", query)) > 1:
-        warnings.warn("sql2mermaid does not support multiple FROM clauses.")
+        raise ValueError("sql2mermaid does not support multiple FROM clauses.")
     else:
         select_clause = re.findall(r"(?<=select).+(?=from)", query)[0]
         select_clause = select_clause+","

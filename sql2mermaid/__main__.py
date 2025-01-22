@@ -1,6 +1,5 @@
-from . import sql2mermaid, open_sql_file
-
+from . import cli
+import sys
 if __name__ == "__main__":
-    query = open_sql_file("./test.sql")
-    restuls = sql2mermaid(query)
-    print(restuls)
+    cli = cli.CLI()
+    cli.run(argv=sys.argv[1:])

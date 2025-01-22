@@ -2,10 +2,15 @@
 A module to convert an SQL query into a mermaid erDiagram.
 
 # use CLI
-
+## With SQL File
 ```bash
 python -m sql2mermaid --input /my/sqlfile.sql
 ```
+## With query directly in CLI
+```bash
+python -m sql2mermaid --query "SELECT a.*, b.* FROM table a join table_2 b on a.id = b.id WHERE 1=1;"
+```
+**NB :** mermaid need a JOIN and a WHERE clause to work correctly. Put a dummy WHERE 1=1 if you don't want to use the WHERE clause.  
 
 # use API
 

@@ -19,6 +19,13 @@ def open_sql_file(path: str) -> str:
 
 
 def sql2mermaid(query: str) -> str:
+    """
+        Main function to convert sql query to mermaid
+
+        :param query: sql query
+
+        :returns: mermaid diagram markdown
+    """
 
     query = query.lower()
     query = re.sub(r"\n", " ", query)
@@ -118,7 +125,6 @@ def sql2mermaid(query: str) -> str:
             (pl.col("identifier") + "[\"" + pl.col("name") + " as " + pl.col(
                 "identifier") + "\"] {\n" + pl.col("name_right").fill_null("") + "\n}").alias("mermaid"),
         )
-        # print(entities)
         relations = join.with_columns(
             (pl.col("first_table") + "||--||" + pl.col("second_table") +
              " : \"" + pl.col("text") + "\"").alias("mermaid"),

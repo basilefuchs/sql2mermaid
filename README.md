@@ -1,7 +1,13 @@
 # sql2mermaid
-a function to convert an SQL query into a mermaid erDiagram.
+A module to convert an SQL query into a mermaid erDiagram.
 
-# use
+# use CLI
+
+```bash
+python -m sql2mermaid --input /my/sqlfile.sql
+```
+
+# use API
 
 ```python
 # add your SQL query
@@ -43,4 +49,4 @@ c["deaths as c"] {
 a||--||b : "a.patient_id = b.patient_id"
 a||--||c : "a.patient_id = c.patient_id"
 ```
-> Note : past result on Mermaid Live editor (https://mermaid.live/)
+> Note : past result on [Mermaid Live editor](https://mermaid.live/)

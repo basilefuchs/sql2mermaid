@@ -2,6 +2,17 @@ import polars as pl
 import re
 
 
+def open_sql_file(path: str) -> str:
+    try:
+        file = open(path, 'r')
+        sql_file = file.read()
+        file.close()
+        return (sql_file)
+
+    except FileNotFoundError as e:
+        print(e)
+
+
 def sql2mermaid(query: str) -> str:
 
     query = query.lower()

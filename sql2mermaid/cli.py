@@ -14,7 +14,13 @@ class CLI:
             "--input_file",
             type=str,
             help="Path to the .sql file",
-            required=True,
+            required=False,
+        )
+        parser.add_argument(
+            "--query",
+            type=str,
+            help="Query you want to convert to mermaid",
+            required=False
         )
         return parser.parse_args(argv)
 
@@ -22,6 +28,14 @@ class CLI:
         """Main function"""
         args = self.parse_cli(argv)
         input_file = args.input
-        input_query = open_sql_file(input_file)
-        output = sql2mermaid(input_query)
-        print("output :", output)
+        query = args.query
+        if query:
+            output = sql2mermaid(query)
+            print("output : ", output)
+        elif input_file:
+            input_query = open_sql_file(input_file)
+            output = sql2mermaid(input_query)
+            print("output :", output)
+        else:
+            raise argparse.ArgumentError(
+                "You need to specify at least one argument")

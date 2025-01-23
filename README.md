@@ -1,18 +1,26 @@
 # sql2mermaid
 A module to convert an SQL query into a mermaid erDiagram.
 
-# use CLI
-## With SQL File
+# Installation 
+
+```python
+git clone git@github.com:dridk/sql2mermaid.git
+cd sql2mermaid 
+pip install -r requirements.txt
+```
+
+# Usage
+## From CLI
 ```bash
 python -m sql2mermaid --input /my/sqlfile.sql
 ```
-## With query directly in CLI
+
 ```bash
 python -m sql2mermaid --query "SELECT a.*, b.* FROM table a join table_2 b on a.id = b.id WHERE 1=1;"
 ```
 **NB :** mermaid need a JOIN and a WHERE clause to work correctly. Put a dummy WHERE 1=1 if you don't want to use the WHERE clause.  
 
-# From python
+# From Python
 
 ```python
 from sql2mermaid import sql2mermaid
@@ -36,7 +44,7 @@ ORDER BY b.date"""
 mermaid = sql2mermaid(q)
 print(mermaid)
 ```
-# result
+# Output
 
 ```mermaid
 %% Note : sql2mermaid does not support SQL functions.

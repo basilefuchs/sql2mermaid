@@ -4,7 +4,7 @@ A module to convert an SQL query into a mermaid erDiagram.
 # Installation 
 
 ```python
-git clone git@github.com:dridk/sql2mermaid.git
+git clone git@github.com:basilefuchs/sql2mermaid.git
 cd sql2mermaid 
 pip install -r requirements.txt
 ```

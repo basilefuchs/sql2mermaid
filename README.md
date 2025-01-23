@@ -15,7 +15,7 @@ python -m sql2mermaid --query "SELECT a.*, b.* FROM table a join table_2 b on a.
 # From python
 
 ```python
-import polars as pl
+from sql2mermaid import sql2mermaid
 
 # add your SQL query
 q = """
@@ -33,7 +33,8 @@ c.patient_id is null
 ORDER BY b.date"""
 
 # execute function
-sql2mermaid(q)
+mermaid = sql2mermaid(q)
+print(mermaid)
 ```
 # result
 

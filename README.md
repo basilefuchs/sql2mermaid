@@ -12,9 +12,11 @@ python -m sql2mermaid --query "SELECT a.*, b.* FROM table a join table_2 b on a.
 ```
 **NB :** mermaid need a JOIN and a WHERE clause to work correctly. Put a dummy WHERE 1=1 if you don't want to use the WHERE clause.  
 
-# use API
+# From python
 
 ```python
+import polars as pl
+
 # add your SQL query
 q = """
 SELECT 

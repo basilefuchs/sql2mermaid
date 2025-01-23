@@ -35,7 +35,7 @@ sql2mermaid(q)
 ```
 # result
 
-```
+```mermaid
 %% Note : sql2mermaid does not support SQL functions.
 
 erDiagram

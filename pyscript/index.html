@@ -1,61 +1,72 @@
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en"> -->
+<!-- <head> -->
+    <!-- <meta charset="UTF-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <title>Mermaid Diagram Generator</title> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <!-- <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+<!-- </head> -->
+<!-- <body> -->
+    <!-- <h1>Mermaid Diagram Generator</h1> -->
+    <!-- <textarea id="mermaid-code" placeholder="Enter your Mermaid diagram code here..."></textarea> -->
+    <!-- <button py-click="execute_script">Generate Diagram</button> -->
+    <!-- <div id="diagram-container"> -->
+        <!-- <p>Your diagram will appear here...</p> -->
+    <!-- </div> -->
+    <!-- <script type="py"  src="./test.py"> -->
+
+
+
+    <!-- </script> -->
+    <!-- <textarea id="output" rows="5" cols="40" placeholder="Le message apparaîtra ici..."></textarea> -->
+    <!-- <script> -->
+        <!-- // Initialize Mermaid -->
+        <!-- mermaid.initialize({ startOnLoad: false }); -->
+
+        <!-- // Handle the "Generate Diagram" button click -->
+        <!-- document.getElementById("generate-button").addEventListener("click", () => { -->
+            <!-- const code = document.getElementById("mermaid-code").value; -->
+            <!-- const container = document.getElementById("diagram-container"); -->
+            
+            <!-- // Clear previous diagram -->
+            <!-- container.innerHTML = ""; -->
+
+            <!-- try { -->
+                <!-- // Render the diagram -->
+                <!-- const id = "generated-diagram"; -->
+                <!-- const tempDiv = document.createElement("div"); -->
+                <!-- tempDiv.setAttribute("id", id); -->
+                <!-- tempDiv.setAttribute("class", "mermaid"); -->
+                <!-- tempDiv.textContent = code; -->
+                <!-- container.appendChild(tempDiv); -->
+
+                <!-- mermaid.init(undefined, `#${id}`); -->
+            <!-- } catch (error) { -->
+                <!-- container.innerHTML = `<p style="color: red;">Error generating diagram: ${error.message}</p>`; -->
+            <!-- } -->
+        <!-- }); -->
+    <!-- </script> -->
+<!-- </body> -->
+<!-- </html> -->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mermaid Diagram Generator</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        textarea {
-            width: 100%;
-            height: 150px;
-            margin-bottom: 20px;
-        }
-        #diagram-container {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <link rel="stylesheet" href="index.css">
+      <title>Sql2Mermaid : GUI</title>
+      <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+      <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+  </head>
+  <body>
     <h1>Mermaid Diagram Generator</h1>
     <textarea id="mermaid-code" placeholder="Enter your Mermaid diagram code here..."></textarea>
-    <button id="generate-button">Generate Diagram</button>
-    <div id="diagram-container">
+    <button py-click="generate_graph">Generate mermaid graph</button>
+    <div id="output">
         <p>Your diagram will appear here...</p>
     </div>
-
-    <script>
-        // Initialize Mermaid
-        mermaid.initialize({ startOnLoad: false });
-
-        // Handle the "Generate Diagram" button click
-        document.getElementById("generate-button").addEventListener("click", () => {
-            const code = document.getElementById("mermaid-code").value;
-            const container = document.getElementById("diagram-container");
-            
-            // Clear previous diagram
-            container.innerHTML = "";
-
-            try {
-                // Render the diagram
-                const id = "generated-diagram";
-                const tempDiv = document.createElement("div");
-                tempDiv.setAttribute("id", id);
-                tempDiv.setAttribute("class", "mermaid");
-                tempDiv.textContent = code;
-                container.appendChild(tempDiv);
-
-                mermaid.init(undefined, `#${id}`);
-            } catch (error) {
-                container.innerHTML = `<p style="color: red;">Error generating diagram: ${error.message}</p>`;
-            }
-        });
-    </script>
-</body>
+    <script type="py" src="./generate_graph.py" config="./pyscript.json"></script>
+  </body>
 </html>

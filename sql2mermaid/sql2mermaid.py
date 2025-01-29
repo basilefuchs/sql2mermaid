@@ -18,7 +18,7 @@ def open_sql_file(path: str) -> str:
         print(e)
 
 
-def sql2mermaid(query: str) -> str:
+def mermaid_generator(query: str) -> str:
     """
         Main function to convert sql query to mermaid
 

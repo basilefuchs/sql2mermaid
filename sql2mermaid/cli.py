@@ -1,5 +1,5 @@
 import argparse
-from . import sql2mermaid, open_sql_file
+from . import mermaid_generator, open_sql_file
 
 
 class CLI:
@@ -30,11 +30,11 @@ class CLI:
         input_file = args.input
         query = args.query
         if query:
-            output = sql2mermaid(query)
+            output = mermaid_generator(query)
             print("output : ", output)
         elif input_file:
             input_query = open_sql_file(input_file)
-            output = sql2mermaid(input_query)
+            output = mermaid_generator(input_query)
             print("output :", output)
         else:
             raise argparse.ArgumentError(

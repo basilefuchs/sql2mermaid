@@ -25,15 +25,15 @@ jobs:
 
       - name: Build wheel pyscript
         run: |
-          python -m build --wheel --outdir pyscript
+          python -m build --wheel --outdir pyscript/
 
       - name: Download polars
-        run: wget -P packages https://github.com/pola-rs/polars/releases/download/py-1.19.0/polars-1.19.0-cp39-abi3-emscripten_3_1_58_wasm32.whl
+        run: wget -P pyscript https://github.com/pola-rs/polars/releases/download/py-1.19.0/polars-1.19.0-cp39-abi3-emscripten_3_1_58_wasm32.whl
 
 
       - name: Check files 
         run: |
-          ls pyscript
+          ls pyscript/
 
       - name: Deploy page
         uses: JamesIves/github-pages-deploy-action@v4 

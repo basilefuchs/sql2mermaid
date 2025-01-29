@@ -1,0 +1,6 @@
+{
+  "packages": [
+    "packages/polars-1.19.0-cp39-abi3-emscripten_3_1_58_wasm32.whl",
+    "packages/sql2mermaid-0.0.1-py2.py3-none-any.whl"
+  ]
+}

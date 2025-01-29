@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "sql2mermaid"
+version = "0.0.1"
+description = "Convert SQL Query to mermaid diagram" 
+readme = "README.md"
+licence="GPL-3.0"
+dependencies = [
+  "polars",
+  "argparse",
+]
+authors = [
+  {name="Arthur Lamard", email="arthur@lamard.org"}
+]
+[project.urls]
+Repository = "https://github.com/Micropot/sql2mermaid"
+[project.optional-dependencies]
+dev= ["pytest", "pytest-cov", "twine", "build"]

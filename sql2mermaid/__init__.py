@@ -1,1 +1,1 @@
-from .sql2mermaid import sql2mermaid, open_sql_file
+from .sql2mermaid import mermaid_generator, open_sql_file

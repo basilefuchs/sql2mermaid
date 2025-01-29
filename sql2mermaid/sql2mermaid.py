@@ -1,6 +1,5 @@
 import polars as pl
 import re
-import warnings
 
 
 def open_sql_file(path: str) -> str:
@@ -19,7 +18,14 @@ def open_sql_file(path: str) -> str:
         print(e)
 
 
-def sql2mermaid(query: str) -> str:
+def mermaid_generator(query: str) -> str:
+    """
+        Main function to convert sql query to mermaid
+
+        :param query: sql query
+
+        :returns: mermaid diagram markdown
+    """
 
     query = query.lower()
     query = re.sub(r"\n", " ", query)
@@ -31,16 +37,16 @@ def sql2mermaid(query: str) -> str:
     query = re.sub(r"case.+end\s+\w+", "case_when", query)
 
     if re.search(r"union|minus|intersect", query):
-        warnings.warn(
+        raise ValueError(
             "sql2mermaid does not support UNION, INTERSECT, MINUS operators.")
     elif re.search(r"^((?!join).)*$", query):
-        warnings.warn(
+        raise ValueError(
             "sql2mermaid needs a JOIN operation to make a mermaid erDiagram.")
     elif re.search(r"^((?!where).)*$", query):
-        warnings.warn(
+        raise ValueError(
             "sql2mermaid needs a WHERE clause, so add a dummy 'WHERE 1=1'.")
     elif len(re.findall(r"from", query)) > 1:
-        warnings.warn("sql2mermaid does not support multiple FROM clauses.")
+        raise ValueError("sql2mermaid does not support multiple FROM clauses.")
     else:
         select_clause = re.findall(r"(?<=select).+(?=from)", query)[0]
         select_clause = select_clause+","
@@ -119,7 +125,6 @@ def sql2mermaid(query: str) -> str:
             (pl.col("identifier") + "[\"" + pl.col("name") + " as " + pl.col(
                 "identifier") + "\"] {\n" + pl.col("name_right").fill_null("") + "\n}").alias("mermaid"),
         )
-        # print(entities)
         relations = join.with_columns(
             (pl.col("first_table") + "||--||" + pl.col("second_table") +
              " : \"" + pl.col("text") + "\"").alias("mermaid"),

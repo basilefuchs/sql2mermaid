@@ -1,5 +1,5 @@
 from pyscript import document
-import sql2mermaid
+from sql2mermaid.sql2mermaid import sql2mermaid
 
 
 def generate_graph(event):
@@ -7,4 +7,4 @@ def generate_graph(event):
     print("coucou")
     sql_query = input_text.value
     output_div = document.querySelector("#output")
-    output_div.innerText = sql2mermaid.sql2mermaid(sql_query)
+    output_div.innerText = sql2mermaid(sql_query)

@@ -25,7 +25,7 @@ jobs:
 
       - name: Build wheel package
         run: |
-          python -m build --wheel --outdir www/
+          python -m build --wheel --outdir packages/
 
       - name: Download polars
         run: wget -P www https://github.com/pola-rs/polars/releases/download/py-1.19.0/polars-1.19.0-cp39-abi3-emscripten_3_1_58_wasm32.whl
@@ -33,10 +33,10 @@ jobs:
 
       - name: Check files 
         run: |
-          ls www/
+          ls packages/
 
       - name: Deploy page
         uses: JamesIves/github-pages-deploy-action@v4 
         with:
-          folder: www
+          folder: packages
           token: ${{ secrets.GITHUB_TOKEN }} 
